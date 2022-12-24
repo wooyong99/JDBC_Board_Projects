@@ -38,6 +38,13 @@ public class JDBCInsertTest {
       }catch(SQLException e){
         e.printStackTrace();
       }
+      try{
+        if(psts != null && !psts.isClosed()){
+          psts.close();
+        }
+      }catch(SQLException e){
+        e.printStackTrace();
+      }
     }
   }
 }
