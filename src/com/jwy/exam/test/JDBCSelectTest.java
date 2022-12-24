@@ -43,8 +43,8 @@ public class JDBCSelectTest {
     }
     finally {
       try{
-        if(con != null && !con.isClosed()){
-          con.close();
+        if(rs != null && !rs.isClosed()){
+          rs.close();
         }
       }catch(SQLException e){
         e.printStackTrace();
@@ -52,6 +52,13 @@ public class JDBCSelectTest {
       try{
         if(psts != null && !psts.isClosed()){
           psts.close();
+        }
+      }catch(SQLException e){
+        e.printStackTrace();
+      }
+      try{
+        if(con != null && !con.isClosed()){
+          con.close();
         }
       }catch(SQLException e){
         e.printStackTrace();
