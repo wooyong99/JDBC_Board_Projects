@@ -17,3 +17,14 @@ SET regDate = NOW(),
 updateDate = NOW(),
 title = "제목",
 `body` = "내용";
+
+CREATE TABLE `member`(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	loginId CHAR(50) NOT NULL,
+	loginPw CHAR(200) NOT NULL,
+	`name` CHAR(100) NOT NULL
+);
+
+SELECT * FROM `member`;
