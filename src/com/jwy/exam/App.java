@@ -1,5 +1,6 @@
 package com.jwy.exam;
 
+import com.jwy.exam.controller.MemberController;
 import com.jwy.exam.util.DBUtil;
 import com.jwy.exam.util.SecSql;
 
@@ -48,6 +49,9 @@ public class App {
   }
 
   private int doAction(Connection con, Scanner sc, String cmd) {
+    MemberController memberController = new MemberController();
+    memberController.setScanner(sc);
+    memberController.setCon(con);
     if (cmd.equals("article list")) {
       List<Article> articles = new ArrayList<Article>();
 
@@ -151,62 +155,7 @@ public class App {
 
       DBUtil.delete(con, sql);
     } else if (cmd.equals("member join")) {
-      System.out.println("== 회원 가입 ==");
-      String loginId, loginPw, loginPwConfirm, name;
-      while (true) {
-        System.out.printf("로그인 아이디 : ");
-        loginId = sc.nextLine().trim();
-        if (loginId.length() == 0) {
-          System.out.println("로그인 아이디를 입력해주세요.");
-          continue;
-        }
-        if (!loginIdValidation(con, loginId)) {
-          System.out.println("로그인 아이디가 중복됩니다.");
-          continue;
-        }
-        break;
-      }
-      while (true) {
-        System.out.printf("로그인 비밀번호 : ");
-        loginPw = sc.nextLine().trim();
-        if (loginPw.length() == 0) {
-          System.out.println("로그인 비밀번호를 입력해주세요.");
-          continue;
-        }
-        while (true) {
-          System.out.printf("로그인 비밀번호 확인 : ");
-          loginPwConfirm = sc.nextLine().trim();
-          if (loginPwConfirm.length() == 0) {
-            System.out.println("로그인 비밀번호 확인을 입력해주세요.");
-            continue;
-          }
-          if (!loginPwConfirm.equals(loginPw)) {
-            System.out.println("로그인 비밀번호가 일치하지 않습니다.");
-            continue;
-          }
-          break;
-        }
-        break;
-      }
-      while (true) {
-        System.out.printf("이름 : ");
-        name = sc.nextLine().trim();
-        if (name.length() == 0) {
-          System.out.println("이름을 입력해주세요.");
-          continue;
-        }
-        break;
-      }
-      SecSql sql = new SecSql();
-      sql.append("INSERT INTO `member`");
-      sql.append("SET regDate = NOW()");
-      sql.append(", updateDate = NOW()");
-      sql.append(", loginId = ?", loginId);
-      sql.append(", loginPw = ?", loginPw);
-      sql.append(", `name` = ?", name);
-
-      int id = DBUtil.insert(con, sql);
-      System.out.printf("%d번 (%s) 회원이 생성되었습니다.\n", id, name);
+      memberController.join(cmd);
     } else if (cmd.equals("system exit")) {
       System.out.println("== 시스템 종료 ==");
       System.exit(0);
@@ -214,20 +163,5 @@ public class App {
       System.out.println("명령어를 확인해주세요.");
     }
     return 0;
-  }
-
-  // loginId 중복 검증 메소드
-  private boolean loginIdValidation(Connection con, String loginId) {
-    SecSql sql = new SecSql();
-    sql.append("SELECT COUNT(*) AS cnt");
-    sql.append("FROM `member`");
-    sql.append("WHERE loginId = ?", loginId);
-
-    int articleCount = DBUtil.selectRowIntValue(con, sql);
-    if (articleCount == 0) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }
