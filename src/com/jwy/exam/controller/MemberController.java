@@ -1,24 +1,19 @@
 package com.jwy.exam.controller;
 
-import com.jwy.exam.util.DBUtil;
-import com.jwy.exam.util.SecSql;
-import com.jwy.exam.util.Util;
+import com.jwy.exam.service.MemberService;
 
 import java.sql.Connection;
 import java.util.Scanner;
 
-public class MemberController {
-  private Scanner sc;
-  private Connection con;
+public class MemberController extends Controller {
+  MemberService memberService;
 
-  public void setScanner(Scanner sc) {
-    this.sc = sc;
+  public MemberController(Connection con, Scanner sc) {
+    super(con, sc);
+    this.memberService = new MemberService(con);
   }
 
-  public void setCon(Connection con) {
-    this.con = con;
-  }
-  public void join(String cmd){
+  public void join() {
     System.out.println("== 회원 가입 ==");
     String loginId, loginPw, loginPwConfirm, name;
     while (true) {
@@ -28,7 +23,10 @@ public class MemberController {
         System.out.println("로그인 아이디를 입력해주세요.");
         continue;
       }
-      if (! Util.loginIdValidation(con, loginId)) {
+
+      boolean loginedDu = memberService.isLogined(loginId);
+
+      if (loginedDu) {
         System.out.println("로그인 아이디가 중복됩니다.");
         continue;
       }
@@ -65,15 +63,9 @@ public class MemberController {
       }
       break;
     }
-    SecSql sql = new SecSql();
-    sql.append("INSERT INTO `member`");
-    sql.append("SET regDate = NOW()");
-    sql.append(", updateDate = NOW()");
-    sql.append(", loginId = ?", loginId);
-    sql.append(", loginPw = ?", loginPw);
-    sql.append(", `name` = ?", name);
 
-    int id = DBUtil.insert(con, sql);
+    int id = memberService.join(loginId, loginPw, name);
+
     System.out.printf("%d번 (%s) 회원이 생성되었습니다.\n", id, name);
   }
 }
