@@ -2,8 +2,6 @@ package com.jwy.exam;
 
 import com.jwy.exam.controller.ArticleController;
 import com.jwy.exam.controller.MemberController;
-import com.jwy.exam.util.DBUtil;
-import com.jwy.exam.util.SecSql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -63,8 +61,10 @@ public class App {
       articleController.delete(cmd);
     } else if (cmd.equals("member join")) {
       memberController.join();
-    }else if (cmd.equals("member login")){
+    } else if (cmd.equals("member login")) {
       memberController.login();
+    } else if(cmd.equals("member whoami")){
+      memberController.whoami();
     }else if (cmd.equals("system exit")) {
       System.out.println("== 시스템 종료 ==");
       System.exit(0);

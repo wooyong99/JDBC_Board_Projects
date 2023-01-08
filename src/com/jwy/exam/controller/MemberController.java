@@ -3,10 +3,6 @@ package com.jwy.exam.controller;
 import com.jwy.exam.Container;
 import com.jwy.exam.Member;
 import com.jwy.exam.service.MemberService;
-import com.jwy.exam.util.DBUtil;
-
-import java.sql.Connection;
-import java.util.Scanner;
 
 public class MemberController extends Controller {
   MemberService memberService;
@@ -110,7 +106,16 @@ public class MemberController extends Controller {
         continue;
       }
       System.out.printf("%s님 환영합니다.\n", member.name);
+      Container.session.login(member);
       break;
+    }
+  }
+
+  public void whoami() {
+    if(Container.session.isLogined()){
+      System.out.println(Container.session.loginedMember.loginId);
+    }else{
+      System.out.println("로그아웃 상태입니다.");
     }
   }
 }
