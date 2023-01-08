@@ -17,4 +17,9 @@ public class Session {
     loginedMember = member;
     loginedMemberId = member.id;
   }
+
+  public void logout() {
+    loginedMember = null;
+    loginedMemberId = -1;
+  }
 }

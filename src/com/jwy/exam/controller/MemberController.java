@@ -118,4 +118,13 @@ public class MemberController extends Controller {
       System.out.println("로그아웃 상태입니다.");
     }
   }
+
+  public void logout() {
+    if(Container.session.isLogined()){
+      Container.session.logout();
+      System.out.println("로그아웃 되었습니다.");
+    }else{
+      System.out.println("이미 로그아웃 상태입니다.");
+    }
+  }
 }
