@@ -4,7 +4,6 @@ import com.jwy.exam.Article;
 import com.jwy.exam.Container;
 import com.jwy.exam.dao.ArticleDao;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class ArticleService {
@@ -17,8 +16,8 @@ public class ArticleService {
     return articleDao.getArticles();
   }
 
-  public int add(String title, String body) {
-    return articleDao.add(title, body);
+  public int add(int memberId, String title, String body) {
+    return articleDao.add(memberId, title, body);
   }
 
   public Article getArticleById(int id) {

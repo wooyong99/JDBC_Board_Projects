@@ -29,10 +29,11 @@ public class JDBCSelectTest {
         int id = rs.getInt("id");
         String regDate = rs.getString("regDate");
         String updateDate = rs.getString("updateDate");
+        int memberId = rs.getInt("memberId");
         String title = rs.getString("title");
         String body = rs.getString("body");
 
-        Article article = new Article(id, regDate, updateDate, title, body);
+        Article article = new Article(id, regDate, updateDate, memberId,  title, body);
         articles.add(article);
       }
       System.out.println("결과 : " + articles);

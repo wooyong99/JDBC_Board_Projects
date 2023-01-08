@@ -9,14 +9,29 @@ CREATE TABLE article(
 	title CHAR(100) NOT NULL,
 	`body` TEXT NOT NULL
 );
-
-SELECT * FROM article;
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-title = "제목",
-`body` = "내용";
+memberId = 1,
+title = "제목1",
+`body` = "내용1";
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+title = "제목2",
+`body` = "내용2";
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+title = "제목3",
+`body` = "내용3";
+
 
 CREATE TABLE `member`(
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -27,4 +42,19 @@ CREATE TABLE `member`(
 	`name` CHAR(100) NOT NULL
 );
 
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = "user1",
+loginPw = "user1",
+`name`="홍길동";
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = "user2",
+loginPw = "user2",
+`name`="홍길순";
+
 SELECT * FROM `member`;
+SELECT * FROM article;

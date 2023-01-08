@@ -68,6 +68,10 @@ public class MemberController extends Controller {
   }
 
   public void login() {
+    if(Container.session.isLogined()){
+      System.out.println("이미 로그인 상태입니다.");
+      return;
+    }
     String loginId;
     String loginPw;
     Member member;
