@@ -1,6 +1,7 @@
 package com.jwy.exam.controller;
 
 import com.jwy.exam.Article;
+import com.jwy.exam.Container;
 import com.jwy.exam.service.ArticleService;
 
 import java.sql.Connection;
@@ -9,9 +10,8 @@ import java.util.Scanner;
 
 public class ArticleController extends Controller{
   ArticleService articleService;
-  public ArticleController(Connection con, Scanner sc){
-    super(con, sc);
-    this.articleService = new ArticleService(con);
+  public ArticleController(){
+    this.articleService = Container.articleService;
   }
 
   public void showList() {

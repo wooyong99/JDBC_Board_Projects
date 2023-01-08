@@ -1,5 +1,6 @@
 package com.jwy.exam.controller;
 
+import com.jwy.exam.Container;
 import com.jwy.exam.Member;
 import com.jwy.exam.service.MemberService;
 import com.jwy.exam.util.DBUtil;
@@ -10,9 +11,8 @@ import java.util.Scanner;
 public class MemberController extends Controller {
   MemberService memberService;
 
-  public MemberController(Connection con, Scanner sc) {
-    super(con, sc);
-    this.memberService = new MemberService(con);
+  public MemberController() {
+    this.memberService = Container.memberService;
   }
 
   public void join() {

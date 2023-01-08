@@ -1,6 +1,7 @@
 package com.jwy.exam.dao;
 
 import com.jwy.exam.Article;
+import com.jwy.exam.Container;
 import com.jwy.exam.util.DBUtil;
 import com.jwy.exam.util.SecSql;
 
@@ -10,12 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ArticleDao {
-  protected Connection con;
-
-  public ArticleDao(Connection con){
-    this.con = con;
-  }
-
   public List<Article> getArticles() {
     List<Article> articles = new ArrayList<Article>();
     SecSql sql = new SecSql();
@@ -23,7 +18,7 @@ public class ArticleDao {
     sql.append("FROM article");
     sql.append("ORDER BY id DESC");
 
-    List<Map<String, Object>> articleListMap = DBUtil.selectRows(con, sql);
+    List<Map<String, Object>> articleListMap = DBUtil.selectRows(Container.con, sql);
 
     for (Map<String, Object> articleMap : articleListMap) {
       articles.add(new Article(articleMap));
@@ -39,7 +34,7 @@ public class ArticleDao {
     sql.append(", title = ?", title);
     sql.append(", body = ?", body);
 
-    int id = DBUtil.insert(con, sql);
+    int id = DBUtil.insert(Container.con, sql);
     return id;
   }
 
@@ -48,7 +43,7 @@ public class ArticleDao {
     sql.append("SELECT * FROM article");
     sql.append("WHERE id = ?", id);
 
-    Map<String, Object> articleMap = DBUtil.selectRow(con, sql);
+    Map<String, Object> articleMap = DBUtil.selectRow(Container.con, sql);
 
     if(articleMap.isEmpty()){
       return null;
@@ -63,7 +58,7 @@ public class ArticleDao {
     sql.append("FROM article");
     sql.append("WHERE id = ?", id);
 
-    return DBUtil.selectRowIntValue(con, sql);
+    return DBUtil.selectRowIntValue(Container.con, sql);
 
   }
 
@@ -75,7 +70,7 @@ public class ArticleDao {
     sql.append(", `body` = ?", body);
     sql.append("WHERE id = ?", id);
 
-    DBUtil.update(con, sql);
+    DBUtil.update(Container.con, sql);
   }
 
   public void delete(int id) {
@@ -83,6 +78,6 @@ public class ArticleDao {
     sql.append("DELETE FROM article");
     sql.append("WHERE id = ?", id);
 
-    DBUtil.delete(con, sql);
+    DBUtil.delete(Container.con, sql);
   }
 }

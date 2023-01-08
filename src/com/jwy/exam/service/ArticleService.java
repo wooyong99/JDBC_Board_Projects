@@ -1,6 +1,7 @@
 package com.jwy.exam.service;
 
 import com.jwy.exam.Article;
+import com.jwy.exam.Container;
 import com.jwy.exam.dao.ArticleDao;
 
 import java.sql.Connection;
@@ -8,11 +9,8 @@ import java.util.List;
 
 public class ArticleService {
   protected ArticleDao articleDao;
-  protected Connection con;
-
-  public ArticleService(Connection con){
-    this.con = con;
-    this.articleDao = new ArticleDao(con);
+  public ArticleService(){
+    this.articleDao = Container.articleDao;
   }
 
   public List<Article> getArticles() {

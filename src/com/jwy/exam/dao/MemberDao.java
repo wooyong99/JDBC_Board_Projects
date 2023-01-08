@@ -1,5 +1,6 @@
 package com.jwy.exam.dao;
 
+import com.jwy.exam.Container;
 import com.jwy.exam.Member;
 import com.jwy.exam.util.DBUtil;
 import com.jwy.exam.util.SecSql;
@@ -8,19 +9,13 @@ import java.sql.Connection;
 import java.util.Map;
 
 public class MemberDao {
-  protected Connection con;
-
-  public MemberDao(Connection con){
-    this.con = con;
-  }
-
   public boolean isLogined(String loginId) {
     SecSql sql = new SecSql();
     sql.append("SELECT COUNT(*) > 0");
     sql.append("FROM `member`");
     sql.append("WHERE loginId= ?", loginId);
 
-    return DBUtil.selectRowBooleanValue(con, sql);
+    return DBUtil.selectRowBooleanValue(Container.con, sql);
   }
 
   public int join(String loginId, String loginPw, String name) {
@@ -32,7 +27,7 @@ public class MemberDao {
     sql.append(", loginPw = ?", loginPw);
     sql.append(", `name` = ?", name);
 
-    int id = DBUtil.insert(con, sql);
+    int id = DBUtil.insert(Container.con, sql);
 
     return id;
   }
@@ -42,7 +37,7 @@ public class MemberDao {
     sql.append("SELECT * FROM `member`");
     sql.append("WHERE loginId = ?",loginId);
 
-    Map<String, Object> memberMap = DBUtil.selectRow(con, sql);
+    Map<String, Object> memberMap = DBUtil.selectRow(Container.con, sql);
     if(memberMap.isEmpty()){
       return null;
     }else{

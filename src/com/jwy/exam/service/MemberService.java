@@ -1,5 +1,6 @@
 package com.jwy.exam.service;
 
+import com.jwy.exam.Container;
 import com.jwy.exam.Member;
 import com.jwy.exam.dao.MemberDao;
 
@@ -9,9 +10,8 @@ public class MemberService {
   protected Connection con;
   MemberDao memberDao;
 
-  public MemberService(Connection con){
-    this.con = con;
-    this.memberDao = new MemberDao(con);
+  public MemberService(){
+    this.memberDao = Container.memberDao;
   }
 
   public boolean isLogined(String loginId) {
