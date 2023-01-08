@@ -1,7 +1,7 @@
 package com.jwy.exam.service;
 
 import com.jwy.exam.Container;
-import com.jwy.exam.Member;
+import com.jwy.exam.dto.Member;
 import com.jwy.exam.dao.MemberDao;
 
 import java.sql.Connection;

@@ -1,7 +1,7 @@
 package com.jwy.exam.controller;
 
 import com.jwy.exam.Container;
-import com.jwy.exam.Member;
+import com.jwy.exam.dto.Member;
 import com.jwy.exam.service.MemberService;
 
 public class MemberController extends Controller {

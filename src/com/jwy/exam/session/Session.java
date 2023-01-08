@@ -1,6 +1,6 @@
 package com.jwy.exam.session;
 
-import com.jwy.exam.Member;
+import com.jwy.exam.dto.Member;
 
 public class Session {
   public int loginedMemberId;

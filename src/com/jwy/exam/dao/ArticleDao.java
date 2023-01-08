@@ -1,6 +1,6 @@
 package com.jwy.exam.dao;
 
-import com.jwy.exam.Article;
+import com.jwy.exam.dto.Article;
 import com.jwy.exam.Container;
 import com.jwy.exam.util.DBUtil;
 import com.jwy.exam.util.SecSql;
@@ -13,11 +13,11 @@ public class ArticleDao {
   public List<Article> getArticles() {
     List<Article> articles = new ArrayList<Article>();
     SecSql sql = new SecSql();
-    sql.append("SELECT A.*, M.name AS extra__writerName");
-    sql.append("FROM article AS A");
-    sql.append("INNER JOIN member AS M");
-    sql.append("ON A.memberId = M.id");
-    sql.append("ORDER BY id DESC");
+    sql.append("SELECT article.*, member.name AS extra__writerName ");
+    sql.append("FROM article");
+    sql.append("INNER JOIN member");
+    sql.append("ON article.memberId = member.id");
+    sql.append("ORDER BY article.id DESC");
 
     List<Map<String, Object>> articleListMap = DBUtil.selectRows(Container.con, sql);
 

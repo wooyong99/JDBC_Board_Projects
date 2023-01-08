@@ -1,4 +1,4 @@
-package com.jwy.exam;
+package com.jwy.exam.dto;
 
 import java.util.Map;
 
@@ -12,14 +12,14 @@ public class Article {
   public String body;
   public String extra__writerName;
 
-  public Article(int id, String regDate, String updateDate, int memberId, String title, String body) {
-    this.id = id;
-    this.regDate = regDate;
-    this.updateDate = updateDate;
-    this.memberId = memberId;
-    this.title = title;
-    this.body = body;
-  }
+//  public Article(int id, String regDate, String updateDate, int memberId, String title, String body) {
+//    this.id = id;
+//    this.regDate = regDate;
+//    this.updateDate = updateDate;
+//    this.memberId = memberId;
+//    this.title = title;
+//    this.body = body;
+//  }
 
   public Article(Map<String, Object> articleMap) {
     this.id = (int) articleMap.get("id");

@@ -1,11 +1,10 @@
 package com.jwy.exam.dao;
 
 import com.jwy.exam.Container;
-import com.jwy.exam.Member;
+import com.jwy.exam.dto.Member;
 import com.jwy.exam.util.DBUtil;
 import com.jwy.exam.util.SecSql;
 
-import java.sql.Connection;
 import java.util.Map;
 
 public class MemberDao {

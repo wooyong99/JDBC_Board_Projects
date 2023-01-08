@@ -19,7 +19,7 @@ public class App {
       Connection con = null;
       try {
         Class.forName("com.mysql.jdbc.Driver");
-        String url = "jdbc:mysql://localhost:3306/text_board";
+        String url = "jdbc:mysql://localhost:3306/text_board?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull";
         con = DriverManager.getConnection(url, "jwy", "1234");
         Container.con = con;
         int actionResult = doAction(cmd);

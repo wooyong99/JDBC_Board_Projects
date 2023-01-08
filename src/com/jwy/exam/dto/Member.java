@@ -1,4 +1,4 @@
-package com.jwy.exam;
+package com.jwy.exam.dto;
 
 import java.util.Map;
 

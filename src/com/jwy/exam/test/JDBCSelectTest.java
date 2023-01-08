@@ -1,6 +1,6 @@
 package com.jwy.exam.test;
 
-import com.jwy.exam.Article;
+import com.jwy.exam.dto.Article;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,8 +33,8 @@ public class JDBCSelectTest {
         String title = rs.getString("title");
         String body = rs.getString("body");
 
-        Article article = new Article(id, regDate, updateDate, memberId,  title, body);
-        articles.add(article);
+//        Article article = new Article(id, regDate, updateDate, memberId,  title, body);
+//        articles.add(article);
       }
       System.out.println("결과 : " + articles);
     }catch(ClassNotFoundException e){

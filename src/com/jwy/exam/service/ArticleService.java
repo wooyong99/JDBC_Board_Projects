@@ -1,6 +1,6 @@
 package com.jwy.exam.service;
 
-import com.jwy.exam.Article;
+import com.jwy.exam.dto.Article;
 import com.jwy.exam.Container;
 import com.jwy.exam.dao.ArticleDao;
 
