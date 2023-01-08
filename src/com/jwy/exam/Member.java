@@ -1,12 +1,23 @@
 package com.jwy.exam;
 
+import java.util.Map;
+
 public class Member {
-  int id;
-  String regDate;
-  String updateDate;
-  String loginId;
-  String loginPw;
-  String name;
+  public int id;
+  public String regDate;
+  public String updateDate;
+  public String loginId;
+  public String loginPw;
+  public String name;
+
+  public Member(Map<String, Object> memberMap) {
+    this.id = (int)memberMap.get("id");
+    this.regDate = (String)memberMap.get("regDate");
+    this.updateDate = (String)memberMap.get("updateDate");
+    this.loginId = (String)memberMap.get("loginId");
+    this.loginPw = (String)memberMap.get("loginPw");
+    this.name = (String)memberMap.get("name");
+  }
 
   @Override
   public String toString() {

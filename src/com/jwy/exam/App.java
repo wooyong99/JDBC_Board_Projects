@@ -61,7 +61,9 @@ public class App {
       articleController.delete(cmd);
     } else if (cmd.equals("member join")) {
       memberController.join();
-    } else if (cmd.equals("system exit")) {
+    }else if (cmd.equals("member login")){
+      memberController.login();
+    }else if (cmd.equals("system exit")) {
       System.out.println("== 시스템 종료 ==");
       System.exit(0);
     } else {
