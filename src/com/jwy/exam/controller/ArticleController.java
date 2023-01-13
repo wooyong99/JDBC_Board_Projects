@@ -65,13 +65,22 @@ public class ArticleController extends Controller{
       System.out.println("로그인 후 이용해주세요.");
       return;
     }
+
     int id = Integer.parseInt(cmd.split(" ")[2]);
+
     int articleCount = articleService.exists(id);
 
     if (articleCount == 0) {
       System.out.printf("%d번 게시글은 존재하지 않습니다.\n", id);
       return;
     }
+
+    Article article = articleService.getArticleById(id);
+    if(Container.session.loginedMemberId != article.memberId){
+      System.out.println("권한이 없습니다.");
+      return;
+    }
+
     System.out.printf("== %d번 게시물 수정 ==\n", id);
     System.out.printf("새 제목 : ");
     String title = sc.nextLine();
@@ -91,14 +100,15 @@ public class ArticleController extends Controller{
     int id = Integer.parseInt(cmd.split(" ")[2]);
 
     int articleCount = articleService.exists(id);
-//    SecSql sql = new SecSql();
-//    sql.append("SELECT COUNT(*) AS cnt");
-//    sql.append("FROM article");
-//    sql.append("WHERE id = ?", id);
-//
-//    int articleCount = DBUtil.selectRowIntValue(con, sql);
+
     if (articleCount == 0) {
       System.out.printf("%d번 게시글은 존재하지 않습니다.\n", id);
+      return;
+    }
+
+    Article article = articleService.getArticleById(id);
+    if(Container.session.loginedMemberId != article.memberId){
+      System.out.println("권한이 없습니다.");
       return;
     }
 
