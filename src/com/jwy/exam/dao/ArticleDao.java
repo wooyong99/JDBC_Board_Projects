@@ -42,8 +42,10 @@ public class ArticleDao {
 
   public Article getArticleById(int id) {
     SecSql sql = new SecSql();
-    sql.append("SELECT * FROM article");
-    sql.append("WHERE id = ?", id);
+    sql.append("SELECT A.*, M.name as extra__writerName FROM article as A");
+    sql.append("INNER JOIN member as M");
+    sql.append("ON A.memberId = M.id");
+    sql.append("WHERE A.id = ?", id);
 
     Map<String, Object> articleMap = DBUtil.selectRow(Container.con, sql);
 
