@@ -37,15 +37,23 @@ public class MemberController extends Controller {
         System.out.println("로그인 비밀번호를 입력해주세요.");
         continue;
       }
+      int tryCnt = 0;
       while (true) {
+        if(tryCnt >= 3){
+          System.out.println("로그인 비밀번호 확인을 3번 틀리셨습니다.");
+          System.out.println("다시 시도해주세요.");
+          return;
+        }
         System.out.printf("로그인 비밀번호 확인 : ");
         loginPwConfirm = sc.nextLine().trim();
         if (loginPwConfirm.length() == 0) {
           System.out.println("로그인 비밀번호 확인을 입력해주세요.");
+          tryCnt++;
           continue;
         }
         if (!loginPwConfirm.equals(loginPw)) {
           System.out.println("로그인 비밀번호가 일치하지 않습니다.");
+          tryCnt++;
           continue;
         }
         break;
