@@ -44,7 +44,7 @@ public class ArticleController extends Controller{
 
   public void showDetail(String cmd) {
     int id = Integer.parseInt(cmd.split(" ")[2]);
-
+    articleService.hitIncrease(id);
     Article article = articleService.getArticleById(id);
 
     if (article == null) {
