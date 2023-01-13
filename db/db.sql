@@ -10,27 +10,30 @@ CREATE TABLE article(
 	`body` TEXT NOT NULL
 );
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
-
+ALTER TABLE article ADD COLUMN hit INT(10) UNSIGNED NOT NULL DEFAULT 0;
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 title = "제목1",
-`body` = "내용1";
+`body` = "내용1",
+hit=10;
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 title = "제목2",
-`body` = "내용2";
+`body` = "내용2",
+hit=22;
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
 title = "제목3",
-`body` = "내용3";
+`body` = "내용3",
+hit=5;
 
 
 CREATE TABLE `member`(
@@ -56,5 +59,7 @@ loginId = "user2",
 loginPw = "user2",
 `name`="홍길순";
 
+DESC MEMBER;
+DESC article;
 SELECT * FROM `member`;
 SELECT * FROM article;
